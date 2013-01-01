@@ -19,3 +19,45 @@ Method Signature Binding
     or to establish a mechanical context.
 
 
+  Coding Language
+
+    Whitespace is not accepted in any of the following code strings.
+
+    Special characters
+
+      .
+      $
+      #
+      )
+      (
+      ,
+
+    Package := name string using '.' hierarchical separator
+
+    Class :=  name string using '$' inner class separator
+
+    Method := name string
+
+    FqType := Package '.' Class
+
+    FqMethod :=
+
+      FqType '#' Method '('  ')'
+
+      FqType '#' Method '(' FqType0 ')'
+
+      FqType '#' Method '(' FqType1 ',' FqType2 ')'
+
+
+    The method code string is always terminated by a parenthetical
+    group.  
+
+    This syntax differentiates the method code string from an enum
+    code string with the same code syntax but missing the terminal
+    parenthetical group.  A user input string missing a terminal
+    parenthetical may add the parenthetical group when the input
+    context is a method reference.
+
+    This group may be empty to identify either a method having no
+    arguments or a method having only one signature in this class.
+
