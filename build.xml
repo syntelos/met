@@ -36,7 +36,7 @@
       </fileset>
     </delete>
 
-    <jar jarfile="${target.jar}" basedir="${bin}" manifest="${src}/Manifest.mf" />
+    <jar jarfile="${target.jar}" basedir="${bin}" />
 
     <delete>
       <fileset dir="${bin}">
@@ -110,55 +110,5 @@
       </copy>
   </target>
 
-  <target name="test" depends="test.jar">
-    <echo>
-      -- 
-      -- Test StreamRead
-      -- 
-    </echo>
-    <java dir="test" fork="true"
-          classname="StreamRead">
-      <classpath>
-        <path refid="lib.path"/>        
-        <pathelement location="${target.jar}"/>
-        <pathelement location="${test.target.jar}"/>
-      </classpath>
-    </java>
-
-  </target>
-
-  <target name="test.jar" depends="test.compile">
-
-    <delete>
-      <fileset dir="${dst}">
-        <include name="**/${ant.project.name}-test-*.jar"/>
-      </fileset>
-    </delete>
-
-    <jar jarfile="${test.target.jar}" basedir="test/bin" />
-
-    <delete>
-      <fileset dir="test/bin">
-        <include name="**/*.class"/>
-      </fileset>
-    </delete>
-
-  </target>
-
-  <target name="test.compile" depends="version">
-
-    <mkdir dir="test/bin"/>
-
-    <javac srcdir="test/src" destdir="test/bin" debug="true" includeantruntime="false" source="${compiler.source}" target="${compiler.target}" encoding="${compiler.encoding}">
-
-      <classpath>
-        <path refid="lib.path"/>        
-        <pathelement location="${target.jar}"/>
-      </classpath>
-
-      <include name="**/*.java"/>
-    </javac>
-
-  </target>
 
 </project>
